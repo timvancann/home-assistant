@@ -23,8 +23,6 @@ async def test_form(hass):
             {
                 "zip_code": "1234AB",
                 "house_number": 42,
-                "house_number_extension": "",
-                "country_code": "NL",
             },
         )
 
@@ -34,8 +32,6 @@ async def test_form(hass):
         "id": "1234AB 42",
         "zip_code": "1234AB",
         "house_number": 42,
-        "house_number_extension": "",
-        "country_code": "NL",
     }
     await hass.async_block_till_done()
     assert len(mock_setup_entry.mock_calls) == 1
@@ -52,30 +48,8 @@ async def test_form_invalid_house_number(hass):
         {
             "zip_code": "1234AB",
             "house_number": -1,
-            "house_number_extension": "",
-            "country_code": "NL",
         },
     )
 
     assert result2["type"] == "form"
     assert result2["errors"] == {"house_number": "invalid_house_number"}
-
-
-async def test_form_invalid_country_code(hass):
-    """Test we handle invalid county code."""
-    result = await hass.config_entries.flow.async_init(
-        DOMAIN, context={"source": config_entries.SOURCE_USER}
-    )
-
-    result2 = await hass.config_entries.flow.async_configure(
-        result["flow_id"],
-        {
-            "zip_code": "1234AB",
-            "house_number": 42,
-            "house_number_extension": "",
-            "country_code": "foo",
-        },
-    )
-
-    assert result2["type"] == "form"
-    assert result2["errors"] == {"country_code": "invalid_country_code"}

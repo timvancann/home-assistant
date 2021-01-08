@@ -7,13 +7,7 @@ from avri.api import Avri
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
-from .const import (
-    CONF_COUNTRY_CODE,
-    CONF_HOUSE_NUMBER,
-    CONF_HOUSE_NUMBER_EXTENSION,
-    CONF_ZIP_CODE,
-    DOMAIN,
-)
+from .const import CONF_HOUSE_NUMBER, CONF_ZIP_CODE, DOMAIN
 
 PLATFORMS = ["sensor"]
 SCAN_INTERVAL = timedelta(hours=4)
@@ -30,8 +24,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     client = Avri(
         postal_code=entry.data[CONF_ZIP_CODE],
         house_nr=entry.data[CONF_HOUSE_NUMBER],
-        house_nr_extension=entry.data.get(CONF_HOUSE_NUMBER_EXTENSION),
-        country_code=entry.data[CONF_COUNTRY_CODE],
     )
 
     hass.data[DOMAIN][entry.entry_id] = client
