@@ -305,6 +305,9 @@ av==8.0.2
 # homeassistant.components.avion
 # avion==0.10
 
+# homeassistant.components.avri
+avri-api==0.1.8
+
 # homeassistant.components.axis
 axis==41
 
@@ -1320,6 +1323,9 @@ pycomfoconnect==0.3
 
 # homeassistant.components.coolmaster
 pycoolmasternet-async==0.1.2
+
+# homeassistant.components.avri
+pycountry==19.8.18
 
 # homeassistant.components.microsoft
 pycsspeechtts==1.0.4
